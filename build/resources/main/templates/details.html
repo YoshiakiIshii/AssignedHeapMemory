@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商品詳細</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .detail-box { width: 400px; border: 1px solid #ddd; padding: 20px; }
+        .detail-row { margin-bottom: 15px; }
+        .detail-label { font-weight: bold; color: #333; }
+        .detail-value { color: #666; }
+        a { color: #0066cc; text-decoration: none; margin-top: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+<h1>商品詳細</h1>
+<div class="detail-box">
+    <div class="detail-row">
+        <span class="detail-label">ID:</span>
+        <span class="detail-value" th:text="${product.id}">ID</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">商品名:</span>
+        <span class="detail-value" th:text="${product.name}">商品名</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">メーカー:</span>
+        <span class="detail-value" th:text="${product.manufacturer}">メーカー</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">価格:</span>
+        <span class="detail-value" th:text="${product.price}">価格</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">登録日時:</span>
+        <span class="detail-value" th:text="${product.createdAt}">登録日時</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">更新日時:</span>
+        <span class="detail-value" th:text="${product.updatedAt}">更新日時</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">削除フラグ:</span>
+        <span class="detail-value" th:text="${product.deleted}">削除フラグ</span>
+    </div>
+</div>
+<a href="/products">戻る</a>
+</body>
+</html>

@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '3.5.9'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.5.9')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+    implementation 'com.opencsv:opencsv:5.7.1'
+	compileOnly 'org.projectlombok:lombok:1.18.42'
+	annotationProcessor 'org.projectlombok:lombok:1.18.42'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompileOnly 'org.projectlombok:lombok:1.18.42'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+springBoot {
+    mainClass = 'com.example.app.Application'
+}
+
+// Disable the Spring Boot repackage task to avoid Gradle plugin compatibility issues
+tasks.named('bootWar') {
+    enabled = false
+}
