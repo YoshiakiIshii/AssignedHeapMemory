@@ -1,6 +1,6 @@
 # AssignedHeapMemory - 商品マスター管理サンプル
 
-シンプルなSpring Boot（JSP）アプリケーション。データはテキストファイル（`data/products.txt`）に保存されます。
+シンプルなSpring Boot（Thymeleaf）アプリケーション。データはテキストファイル（`data/products.txt`）に保存されます。
 
 ビルドと実行:
 
