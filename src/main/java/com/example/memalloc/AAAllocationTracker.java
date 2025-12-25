@@ -1,4 +1,4 @@
-package com.example.mem;
+package com.example.memalloc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,14 +9,14 @@ import java.util.Deque;
 /**
  * ネストを考慮した開始・終了の差分計測用トラッカー。
  */
-public class AllocationTracker {
-    private static final Logger log = LoggerFactory.getLogger(AllocationTracker.class);
+public class AAAllocationTracker {
+    private static final Logger log = LoggerFactory.getLogger(AAAllocationTracker.class);
 
     private static final ThreadLocal<Deque<Long>> STACK = ThreadLocal.withInitial(ArrayDeque::new);
 
     /** 計測開始（スタックに現在バイト数を push） */
     public static void start() {
-        long now = ThreadAllocation.currentThreadAllocatedBytes();
+        long now = AAThreadAllocation.currentThreadAllocatedBytes();
         STACK.get().push(now);
     }
 
@@ -30,7 +30,7 @@ public class AllocationTracker {
             return -1L;
         }
         long start = stack.pop();
-        long end = ThreadAllocation.currentThreadAllocatedBytes();
+        long end = AAThreadAllocation.currentThreadAllocatedBytes();
         if (start < 0 || end < 0) {
             return -1L;
         }

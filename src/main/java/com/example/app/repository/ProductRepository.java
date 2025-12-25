@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class ProductRepository {
 
     private final Path filePath;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");;
 
     public ProductRepository(@Value("${app.data-file:data/products.csv}") String path) {
         this.filePath = Paths.get(path);

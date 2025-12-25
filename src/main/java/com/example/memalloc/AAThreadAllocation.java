@@ -1,4 +1,4 @@
-package com.example.mem;
+package com.example.memalloc;
 
 import com.sun.management.ThreadMXBean;
 import java.lang.management.ManagementFactory;
@@ -6,7 +6,7 @@ import java.lang.management.ManagementFactory;
 /**
  * Thread の割り当てバイト数を安全に取得するユーティリティ。
  */
-public final class ThreadAllocation {
+public final class AAThreadAllocation {
     private static final ThreadMXBean TMXB;
 
     static {
@@ -23,7 +23,7 @@ public final class ThreadAllocation {
         TMXB = tmp;
     }
 
-    private ThreadAllocation() {}
+    private AAThreadAllocation() {}
 
     public static boolean isSupported() {
         return TMXB != null && TMXB.isThreadAllocatedMemorySupported();

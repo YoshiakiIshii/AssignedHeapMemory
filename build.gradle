@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'war'
@@ -22,12 +23,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
     implementation 'com.opencsv:opencsv:5.7.1'
-	compileOnly 'org.projectlombok:lombok:1.18.42'
-	annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompileOnly 'org.projectlombok:lombok:1.18.42'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testCompileOnly 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
 
 tasks.withType(JavaCompile) {
@@ -41,4 +42,27 @@ springBoot {
 // Disable the Spring Boot repackage task to avoid Gradle plugin compatibility issues
 tasks.named('bootWar') {
     enabled = false
+}
+
+/**
+ * ---- JFR 有効化設定（bootRun） ----
+ * JFR を起動時に開始し、build/recordings/bootrun.jfr に出力します。
+ * 必要に応じて settings やローテーション（maxage/maxsize）を調整してください。
+ */
+tasks.named('bootRun') {
+    // 出力先ディレクトリ作成（存在しない場合）
+    doFirst {
+        file("$buildDir/recordings").mkdirs()
+    }
+    jvmArgs = [
+        // 起動時に JFR を開始：プロファイル向けプリセット
+        '-XX:StartFlightRecording=' +
+            'name=bootrun,' +
+            'settings=profile,' +                 // より軽量なら 'default'
+            'filename=' + "$buildDir/recordings/bootrun.jfr," +
+            'maxage=30m,' +                       // ローテーション（古いデータの保持期間）
+            'maxsize=500M',                       // ローテーション（最大サイズ）
+        // オプション：スタック深さを増やす（コストとトレードオフ）
+        '-XX:FlightRecorderOptions=stackdepth=128'
+    ]
 }

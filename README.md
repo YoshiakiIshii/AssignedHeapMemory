@@ -5,15 +5,13 @@
 ビルドと実行:
 
 ```bash
-mvn clean package
-mvn spring-boot:run
+gradle clean build
 ```
 
 または生成されたWARを実行:
 
 ```bash
-mvn package
-java -jar target/assigned-heap-memory-0.0.1-SNAPSHOT.war
+gradle bootrun
 ```
 
 アクセス: http://localhost:8080/products
